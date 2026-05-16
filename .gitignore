@@ -1,0 +1,8 @@
+.venv/
+.env
+progress.json
+failed_api5_*.sh
+jupyter.log
+jupyter.err.log
+.ipynb_checkpoints/
+__pycache__/
