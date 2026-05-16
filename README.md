@@ -7,8 +7,8 @@ This notebook was adapted to run outside Google Colab so the DDA/DLD/DEWA APIs a
 1. Create a virtual environment:
 
 ```powershell
-python -m venv E:\codex_work\venvs\DLD-Ejari-CheckDDAData
-E:\codex_work\venvs\DLD-Ejari-CheckDDAData\Scripts\Activate.ps1
+python -m venv E:\codex_work\venvs\DLD-Ejari-CheckUserDataAutomation
+E:\codex_work\venvs\DLD-Ejari-CheckUserDataAutomation\Scripts\Activate.ps1
 ```
 
 2. Install dependencies:

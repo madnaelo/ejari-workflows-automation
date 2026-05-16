@@ -5,7 +5,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$envName = "DLD-Ejari-CheckDDAData"
+$envName = "DLD-Ejari-CheckUserDataAutomation"
 $venvPath = Join-Path $VenvRoot $envName
 $venvPython = Join-Path $venvPath "Scripts\python.exe"
 
