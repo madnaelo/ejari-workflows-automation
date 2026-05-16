@@ -2,6 +2,7 @@
 .env
 progress.json
 failed_api5_*.sh
+runs/
 jupyter.log
 jupyter.err.log
 .ipynb_checkpoints/
