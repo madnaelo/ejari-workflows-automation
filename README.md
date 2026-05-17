@@ -6,28 +6,19 @@ This notebook was adapted to run outside Google Colab so the DDA/DLD/DEWA APIs a
 
 1. Create a project-local virtual environment:
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
+Run: `python -m venv .venv; .\.venv\Scripts\Activate.ps1`
 
 2. Install dependencies:
 
-```powershell
-pip install -r requirements.txt
-```
+Run: `pip install -r requirements.txt`
 
 3. Copy `.env.example` to `.env` and fill in the same values that were previously stored in Colab secrets/userdata.
 
-```powershell
-Copy-Item .env.example .env
-```
+Run: `Copy-Item .env.example .env`
 
 4. Start Jupyter locally:
 
-```powershell
-.\start_jupyter.ps1
-```
+Run: `.\start_jupyter.ps1`
 
 The launcher uses `.venv` inside this project folder. If `.venv` is missing, it recreates it and installs `requirements.txt`.
 
