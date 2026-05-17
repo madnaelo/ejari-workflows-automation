@@ -4,11 +4,11 @@ This notebook was adapted to run outside Google Colab so the DDA/DLD/DEWA APIs a
 
 ## Setup
 
-1. Create a virtual environment:
+1. Create a project-local virtual environment:
 
 ```powershell
-python -m venv E:\codex_work\venvs\DLD-Ejari-CheckUserDataAutomation
-E:\codex_work\venvs\DLD-Ejari-CheckUserDataAutomation\Scripts\Activate.ps1
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
 2. Install dependencies:
@@ -28,5 +28,7 @@ Copy-Item .env.example .env
 ```powershell
 .\start_jupyter.ps1
 ```
+
+The launcher uses `.venv` inside this project folder. If `.venv` is missing, it recreates it and installs `requirements.txt`.
 
 Then open `Ejari_Creation_Automation.ipynb` and run the cells from your local machine.
