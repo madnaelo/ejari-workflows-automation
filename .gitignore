@@ -1,6 +1,8 @@
 .venv/
 .env
-progress.json
+progress*.json
+failure_report*.csv
+failure_report*.json
 failed_api5_*.sh
 runs/
 jupyter.log
