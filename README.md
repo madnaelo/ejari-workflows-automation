@@ -6,7 +6,10 @@ Local Jupyter notebooks for DLD/DDA/Dubai Now Ejari workflows. The notebooks wer
 
 - `Ejari_Creation_Automation.ipynb` - main workflow notebook for contract creation, signing continuation, cancellation, termination, and DEWA diagnostics.
 - `DEWA_Premise_Id_Audit.ipynb` - audit notebook for comparing DEWA premise IDs across property list, property detail, contract detail, and contract history responses.
-- `Owner_Assets_Contract_History_Comparison.ipynb` - audit notebook for finding active/pending/termination-request contract-history properties missing from the expected owner-assets lists.
+- `Owner_Assets_Current_Contract_Audit.ipynb` - audit notebook for finding owner-assets coverage gaps from current contract history, recent progress successes, uploaded `progress.json`, or individual `success_*.json` files.
+- `notebook_config.py` - shared Emirates ID configuration used by the notebooks.
+- `notebook_operator_utils.py` - shared notebook UI helpers for popup option dialogs, Yes/No prompts, Emirates ID selection, and file pickers.
+- `notebook_progress_utils.py` - shared progress/success JSON loading, validation, and merge helpers.
 - `start_jupyter.ps1` - local Jupyter launcher.
 - `requirements.txt` - Python/Jupyter dependencies.
 - `.env.example` - required environment variable template.
@@ -41,6 +44,23 @@ Use `Ejari_Creation_Automation.ipynb` for day-to-day Ejari processing.
 4. Use `create` or `terminate` modes only when you intend to call the write APIs.
 5. Review run artifacts under `runs/<workflow>_<timestamp>/`.
 
+## Audit Workflows
+
+Use `Owner_Assets_Current_Contract_Audit.ipynb` to verify that properties appear in the expected owner-assets endpoints.
+
+- Current contract-history mode checks active, pending, and termination-request contracts.
+- Owner role expects the property in `owner-assets/owned/{2,3}` or `owner-assets/leased/{2,3}`.
+- Tenant role expects the property in `owner-assets/rented/{2,3}`.
+- Progress/success reference modes can use the newest run, uploaded `progress.json`, multiple uploaded progress files, or individual `success_*.json` files.
+- When progress/success references are cross-checked with current contract history, the output includes both matching contract-history properties and unmatched progress/success reference properties.
+- Problematic output rows are displayed in collapsed sections in the notebook. Expanding a section shows row JSON and owner-assets property-detail curl candidates for the missing endpoint side.
+
+Use `DEWA_Premise_Id_Audit.ipynb` to verify DEWA premise IDs.
+
+- It can audit the newest creation successes, uploaded progress/success files, or live API sources.
+- Live API audit sources are selected with checkboxes: active contract history, non-pending contract history, and owner-assets leased/rented.
+- Uploaded progress/success files can be selected with the native file picker; multiple valid files are merged before audit.
+
 ## Outputs And Resume Files
 
 Runtime files are intentionally ignored by git:
@@ -60,6 +80,7 @@ Runtime files are intentionally ignored by git:
 - Do not commit `.env`, progress files, failure reports, or run output folders.
 - Notebook progress-style logs redact tokens/secrets.
 - Curl repro files intentionally keep full request headers because they are used for API-team troubleshooting. Treat them as sensitive and share only with authorized recipients.
+- Owner-assets audit property-detail curls use placeholder token values in notebook display, but generated runtime evidence may still contain sensitive identifiers.
 - The main notebook uses `REQUEST_TIMEOUT_SECONDS` from `.env` when present; default is `90`.
 
 ## More Documentation

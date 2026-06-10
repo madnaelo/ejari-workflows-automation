@@ -43,6 +43,13 @@ Progress-style notebook logs redact token and secret fields.
 
 Curl repro files intentionally keep full headers because the API team needs reproducible requests. Treat curl files as sensitive operational evidence.
 
+Owner-assets audit notebook display generates property-detail curl candidates with placeholder token values:
+
+- `<IPAAS_BEARER_TOKEN>`
+- `<DLD_TOKEN_FOR_EID_...>`
+
+These displayed curl candidates are still sensitive because they include Emirates IDs, property row values, property IDs, and endpoint paths. The user must replace placeholders with valid operational tokens before running them.
+
 ## Data Classification
 
 Run outputs may include:
@@ -53,5 +60,16 @@ Run outputs may include:
 - contract row values and numbers
 - DLD/DDA/DEWA response payloads
 - bearer/DLD tokens in curl files
+- owner-assets property-detail curl candidates with token placeholders
 
 Store and share these files according to Datacell/DDA handling rules.
+
+## Progress And Success Inputs
+
+Audit notebooks can load:
+
+- run-level `progress.json` files
+- individual `success_*.json` detail files
+- merged progress/success reference files created under `runs/`
+
+These files contain property identifiers, contract numbers, tenant contact fields, and API responses. They remain ignored by git and should be shared only as approved operational evidence.
