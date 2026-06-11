@@ -5,7 +5,7 @@ Local Jupyter notebooks for DLD/DDA/Dubai Now Ejari workflows. The notebooks wer
 ## What Is Included
 
 - `Ejari_Creation_Automation.ipynb` - main workflow notebook for contract creation, signing continuation, cancellation, termination, and DEWA diagnostics.
-- `DEWA_Premise_Id_Audit.ipynb` - audit notebook for comparing DEWA premise IDs across property list, property detail, contract detail, and contract history responses.
+- `DEWA_Premise_Id_Audit.ipynb` - audit notebook for comparing DEWA premise IDs across property list, property detail, contract detail, contract history, success progress, and DEWA status responses; outputs property title, premise mismatch, and New/Renewal contract version columns.
 - `Owner_Assets_Current_Contract_Audit.ipynb` - audit notebook for finding owner-assets coverage gaps from current contract history, recent progress successes, uploaded `progress.json`, or individual `success_*.json` files.
 - `notebook_config.py` - shared Emirates ID configuration used by the notebooks.
 - `notebook_operator_utils.py` - shared notebook UI helpers for popup option dialogs, Yes/No prompts, Emirates ID selection, and file pickers.
@@ -42,7 +42,8 @@ Use `Ejari_Creation_Automation.ipynb` for day-to-day Ejari processing.
 2. Choose whether to run cancellation, termination, creation/signing, or DEWA diagnostic sections when prompted.
 3. Use `curl` mode when you only want reproducible API request files without creating or terminating contracts.
 4. Use `create` or `terminate` modes only when you intend to call the write APIs.
-5. Review run artifacts under `runs/<workflow>_<timestamp>/`.
+5. In `create` mode, optional per-property status control can stop contracts at pending owner sign, pending tenant sign, or pending payment.
+6. Review run artifacts under `runs/<workflow>_<timestamp>/`.
 
 ## Audit Workflows
 

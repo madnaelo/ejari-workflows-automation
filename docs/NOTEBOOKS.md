@@ -34,6 +34,14 @@ Creation flow summary:
 8. Sign as tenant using tenant token when needed.
 9. Save success/failure detail files and reports.
 
+When `create` mode starts, the notebook asks whether to control individual property contract statuses. If enabled, each property prompts for one target:
+
+- `pending_owner_sign` - create the contract and stop before owner signing.
+- `pending_tenant_sign` - create the contract, sign as owner, and stop before tenant signing.
+- `pending_payment` - sign owner and tenant, then stop before payment. This is the previous default behavior because this notebook does not submit payment.
+
+If a contract was intentionally stopped before payment and later needs to move forward, run `create` mode with `Continue signing previously created pending contracts from API` enabled. The continuation flow compares the saved `final_contract_stage` with the newly selected target and only skips records that already satisfy the target.
+
 Termination flow summary:
 
 1. Load leased/rented contract candidates.
@@ -65,6 +73,8 @@ It compares:
 - DEWA premise from contract details
 - DEWA premise from contract history
 - useful fields from DEWA premise status check
+
+The output also includes `property_title`, `contract_version_number`, `contract_version_type`, `dewa_premise_id_mismatch`, and `dewa_premise_id_mismatch_detail`. `contract_version_type` is `Renewal` when `VersionNumber` is greater than 1, otherwise `New`; property-detail payloads can fall back to `AssociatedTenancyContract.Version` when `VersionNumber` is not available.
 
 Outputs are written to `runs/dewa_premise_audit_<timestamp>/`.
 

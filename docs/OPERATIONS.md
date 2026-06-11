@@ -18,8 +18,14 @@
    - `create` for actual contract submission/signing.
 5. Choose `fresh` when intentionally starting over.
 6. Choose `resume` when continuing from `progress.json`.
-7. For each owner Emirates ID, select the tenant profile when prompted.
-8. Review `runs/ejari_creation_<timestamp>/successes` and `runs/ejari_creation_<timestamp>/failures`.
+7. In `create` mode, choose whether to control individual property contract statuses.
+8. If individual control is enabled, choose a target for each property:
+   - `pending_owner_sign` stops after API5 creation and read-only detail checks.
+   - `pending_tenant_sign` signs owner only.
+   - `pending_payment` signs owner and tenant, then stops before payment.
+9. To advance a previously stopped contract, enable `Continue signing previously created pending contracts from API` and choose the later target status when prompted.
+10. For each owner Emirates ID, select the tenant profile when prompted.
+11. Review `runs/ejari_creation_<timestamp>/successes` and `runs/ejari_creation_<timestamp>/failures`.
 
 ## Owner-Assets Audit Checklist
 
@@ -64,6 +70,7 @@ Key files:
 4. For uploaded inputs, use the file picker. Multiple selected files are merged before audit.
 5. Select all configured Emirates IDs or approve them one by one.
 6. Review generated CSV/JSON output under `runs/dewa_premise_audit_<timestamp>/` or `runs/dewa_premise_audit_successes_<timestamp>/`.
+7. Check `dewa_premise_id_mismatch` and `dewa_premise_id_mismatch_detail` for premise IDs that differ across property detail, contract details, contract history, property lists, success progress, or the DEWA status response. Use `contract_version_type` to distinguish `New` from `Renewal` contracts.
 
 ## Cancellation Checklist
 
