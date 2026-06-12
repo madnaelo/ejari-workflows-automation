@@ -85,6 +85,7 @@ Audit notebook for contract document download coverage.
 Scope:
 
 - Processes the configured Emirates IDs in the required order, starting with `784195279540512`.
+- Offers `Process all` or `Ask before each Emirates ID` before API calls start.
 - Fetches contract history from the DLD contract-history endpoint.
 - Filters to active, pending, and termination-request contracts.
 - Checks `downloadTenancyContract` for all in-scope contracts.

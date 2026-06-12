@@ -76,7 +76,7 @@ Key files:
 
 1. Open `Contract_Download_Audit.ipynb`.
 2. Run the configuration/authentication cells from the top.
-3. Confirm the configured Emirates IDs; the notebook starts with `784195279540512`.
+3. Choose whether to process all configured Emirates IDs or confirm one by one; the notebook starts with `784195279540512`.
 4. Let the notebook fetch contract history and check in-scope contracts.
 5. Review `runs/contract_download_audit_<timestamp>/download_checks.csv`.
 6. If there are failures, share only the required curl and response files from the run folder with authorized API/support teams.
