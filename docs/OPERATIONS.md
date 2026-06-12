@@ -72,6 +72,34 @@ Key files:
 6. Review generated CSV/JSON output under `runs/dewa_premise_audit_<timestamp>/` or `runs/dewa_premise_audit_successes_<timestamp>/`.
 7. Check `dewa_premise_id_mismatch` and `dewa_premise_id_mismatch_detail` for premise IDs that differ across property detail, contract details, contract history, property lists, success progress, or the DEWA status response. Use `contract_version_type` to distinguish `New` from `Renewal` contracts.
 
+## Contract Download Audit Checklist
+
+1. Open `Contract_Download_Audit.ipynb`.
+2. Run the configuration/authentication cells from the top.
+3. Confirm the configured Emirates IDs; the notebook starts with `784195279540512`.
+4. Let the notebook fetch contract history and check in-scope contracts.
+5. Review `runs/contract_download_audit_<timestamp>/download_checks.csv`.
+6. If there are failures, share only the required curl and response files from the run folder with authorized API/support teams.
+
+Endpoint expectations:
+
+- Pending contracts are checked with `downloadTenancyContract`.
+- Active and termination-request contracts are checked with both `downloadTenancyContract` and `download`.
+
+## Pending Auto-Cancel Audit Checklist
+
+1. Open `Pending_Contract_Auto_Cancel_Audit.ipynb`.
+2. Run the configuration/authentication cells from the top.
+3. Choose whether to process all Emirates IDs or confirm one by one.
+4. Review `runs/pending_contract_autocancel_audit_<timestamp>/pending_contract_autocancel_report.csv`.
+5. Use `owner_contract_signing_date`, `auto_cancel_1_day_date`, and `auto_cancel_5_day_date` for DLD follow-up.
+
+Important calculation rule:
+
+- The auto-cancel base date is `OwnerContractSigningDate` from contract details.
+- If `OwnerContractSigningDate` is missing, the 1-day and 5-day columns remain blank.
+- Do not use tenant passport expiry, tenant signing date, contract dates, or creation date as auto-cancel dates.
+
 ## Cancellation Checklist
 
 1. Ensure `progress.json` contains the contracts you intend to cancel.

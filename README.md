@@ -6,6 +6,8 @@ Local Jupyter notebooks for DLD/DDA/Dubai Now Ejari workflows. The notebooks wer
 
 - `Ejari_Creation_Automation.ipynb` - main workflow notebook for contract creation, signing continuation, cancellation, termination, and DEWA diagnostics.
 - `DEWA_Premise_Id_Audit.ipynb` - audit notebook for comparing DEWA premise IDs across property list, property detail, contract detail, contract history, success progress, and DEWA status responses; outputs property title, premise mismatch, and New/Renewal contract version columns.
+- `Contract_Download_Audit.ipynb` - audit notebook for validating `downloadTenancyContract` and `download` endpoints for active, pending, and termination-request contracts.
+- `Pending_Contract_Auto_Cancel_Audit.ipynb` - audit notebook for pending contracts that calculates 1-day and 5-day candidate auto-cancel dates from `OwnerContractSigningDate`.
 - `Owner_Assets_Current_Contract_Audit.ipynb` - audit notebook for finding owner-assets coverage gaps from current contract history, recent progress successes, uploaded `progress.json`, or individual `success_*.json` files.
 - `notebook_config.py` - shared Emirates ID configuration used by the notebooks.
 - `notebook_operator_utils.py` - shared notebook UI helpers for popup option dialogs, Yes/No prompts, Emirates ID selection, and file pickers.
@@ -61,6 +63,20 @@ Use `DEWA_Premise_Id_Audit.ipynb` to verify DEWA premise IDs.
 - It can audit the newest creation successes, uploaded progress/success files, or live API sources.
 - Live API audit sources are selected with checkboxes: active contract history, non-pending contract history, and owner-assets leased/rented.
 - Uploaded progress/success files can be selected with the native file picker; multiple valid files are merged before audit.
+
+Use `Contract_Download_Audit.ipynb` to verify contract document download endpoints.
+
+- It starts with Emirates ID `784195279540512`, then processes the other configured Emirates IDs.
+- Pending contracts are checked with `downloadTenancyContract`.
+- Active and termination-request contracts are checked with both `downloadTenancyContract` and `download`.
+- Failed downloads produce matching curl and response files for API-team troubleshooting.
+
+Use `Pending_Contract_Auto_Cancel_Audit.ipynb` to inspect pending contract auto-cancel timing.
+
+- It filters contract history to pending contracts only.
+- It loads contract details for each pending contract.
+- It calculates `auto_cancel_1_day_date` and `auto_cancel_5_day_date` from `OwnerContractSigningDate` only.
+- If `OwnerContractSigningDate` is missing, both auto-cancel date columns are blank and `autocancel_base_source` is marked `missing OwnerContractSigningDate`.
 
 ## Outputs And Resume Files
 

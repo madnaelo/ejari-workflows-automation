@@ -58,6 +58,7 @@ Run outputs may include:
 - property IDs and row values
 - tenant details
 - contract row values and numbers
+- contract document download metadata and response samples
 - DLD/DDA/DEWA response payloads
 - bearer/DLD tokens in curl files
 - owner-assets property-detail curl candidates with token placeholders
@@ -73,3 +74,13 @@ Audit notebooks can load:
 - merged progress/success reference files created under `runs/`
 
 These files contain property identifiers, contract numbers, tenant contact fields, and API responses. They remain ignored by git and should be shared only as approved operational evidence.
+
+## Audit Evidence
+
+Contract download and pending auto-cancel audit notebooks write raw API evidence under `runs/`.
+
+- Contract download failures may include curl files with live bearer/DLD headers.
+- Pending auto-cancel evidence includes contract-history and contract-detail payloads.
+- Auto-cancel reports use `OwnerContractSigningDate` only; stale exploratory files that used unrelated date fields should be deleted and not shared.
+
+Keep `runs/` ignored by git and share only the minimum files needed for the support question.

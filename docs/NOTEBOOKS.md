@@ -78,6 +78,47 @@ The output also includes `property_title`, `contract_version_number`, `contract_
 
 Outputs are written to `runs/dewa_premise_audit_<timestamp>/`.
 
+## `Contract_Download_Audit.ipynb`
+
+Audit notebook for contract document download coverage.
+
+Scope:
+
+- Processes the configured Emirates IDs in the required order, starting with `784195279540512`.
+- Fetches contract history from the DLD contract-history endpoint.
+- Filters to active, pending, and termination-request contracts.
+- Checks `downloadTenancyContract` for all in-scope contracts.
+- Also checks `download` for active and termination-request contracts.
+
+Failure handling:
+
+- A download is considered successful only when the HTTP response returns usable document content.
+- Failed calls are written with request curl files and matching response metadata/payload files.
+- Curl files may include live headers from the request and must be treated as sensitive.
+
+Outputs are written to `runs/contract_download_audit_<timestamp>/`.
+
+## `Pending_Contract_Auto_Cancel_Audit.ipynb`
+
+Audit notebook for pending contract auto-cancel timing.
+
+Scope:
+
+- Processes the configured Emirates IDs in the required order, starting with `784195279540512`.
+- Fetches contract history and keeps pending contracts only.
+- Loads contract details for every pending contract row value.
+- Saves raw contract history and contract detail responses for evidence.
+
+Auto-cancel calculation:
+
+- `OwnerContractSigningDate` from the contract details API is the only base date used.
+- `auto_cancel_1_day_date` is `OwnerContractSigningDate + 1 day`.
+- `auto_cancel_5_day_date` is `OwnerContractSigningDate + 5 days`.
+- If `OwnerContractSigningDate` is missing, the auto-cancel dates are left blank and `autocancel_base_source` is `missing OwnerContractSigningDate`.
+- Tenant passport expiry, tenant signing date, contract start/end date, and creation date are not used as auto-cancel base dates.
+
+Outputs are written to `runs/pending_contract_autocancel_audit_<timestamp>/`.
+
 ## `Owner_Assets_Current_Contract_Audit.ipynb`
 
 Audit notebook for contract-history vs owner-assets consistency.
